@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0064)https://emailnator3-5666fe.viktor.page/biz-canyon-ridge-electric -->
-<html lang="en" style="--primary: #F39C12; --primary-dark: #ce840f; --secondary: #1E293B; --accent: #f6b959; --bg: #0F172A; --surface: #1E293B; --text: #F8FAFC; --text-muted: #94A3B8;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en" style="--primary: #F39C12; --primary-dark: #ce840f; --secondary: #1E293B; --accent: #f6b959; --bg: #FFFFFF; --surface: #F8FAFC; --text: #0F172A; --text-muted: #64748B;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Canyon Ridge Electric — Your Trusted Electrical Experts in Oregon City</title>
@@ -13,7 +13,7 @@
  --primary-dark: #D97706;
  --secondary: #1E293B;
  --accent: #FCD34D;
- --bg: #0F172A;
+ --bg: #FFFFFF;
  --surface: #1E293B;
  --text: #F8FAFC;
  --text-muted: #94A3B8;
@@ -40,7 +40,7 @@
  .anim-d4 { transition-delay: 0.32s; } .anim-d5 { transition-delay: 0.40s; } .anim-d6 { transition-delay: 0.48s; }
  /* ===== NAVBAR ===== */
  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 1.1rem 2rem; transition: all 0.35s; }
- .nav.scrolled { background: rgba(15,23,42,0.95); backdrop-filter: blur(20px); padding: 0.65rem 2rem; box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+ .nav.scrolled { background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); padding: 0.65rem 2rem; box-shadow: 0 4px 24px rgba(15,23,42,0.10); }
  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
  .nav-logo-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--primary); color: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.15rem; flex-shrink: 0; }
@@ -68,7 +68,7 @@
  }
  .hero-overlay {
  position: absolute; inset: 0;
- background: linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.75) 50%, rgba(15,23,42,0.6) 100%);
+ background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.92) 45%, rgba(255,255,255,0.78) 100%);
  }
  .hero-grid-pattern {
  position: absolute; inset: 0;
@@ -119,8 +119,8 @@
  position: relative;
  border-radius: 24px;
  overflow: hidden;
- box-shadow: 0 25px 60px rgba(0,0,0,0.5);
- border: 1px solid rgba(255,255,255,0.08);
+ box-shadow: 0 25px 60px rgba(15,23,42,0.18);
+ border: 1px solid rgba(15,23,42,0.06);
  }
  .hero-img-wrap img {
  width: 100%; height: 380px; object-fit: cover; display: block;
@@ -128,16 +128,16 @@
  .hero-img-wrap::after {
  content: '';
  position: absolute; inset: 0;
- background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.6) 100%);
+ background: linear-gradient(180deg, transparent 55%, rgba(15,23,42,0.35) 100%);
  }
  .hero-float-card {
  position: absolute;
- background: rgba(30,41,59,0.9);
- border: 1px solid rgba(255,255,255,0.08);
+ background: rgba(255,255,255,0.96);
+ border: 1px solid rgba(15,23,42,0.08);
  border-radius: 14px;
  padding: 14px 18px;
  backdrop-filter: blur(12px);
- box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+ box-shadow: 0 10px 30px rgba(15,23,42,0.14);
  z-index: 3;
  }
  /* ===== BUTTONS ===== */
@@ -297,7 +297,10 @@
  @media (min-width: 901px) {
  .hamburger { display: none !important; }
  }
- </style>
+ 
+.nav-links a.nav-cta, .nav-links a.nav-cta:hover, a.nav-cta { color: #0F172A; }
+.nav-links a.nav-cta svg { stroke: #0F172A; }
+</style>
 </head>
 <body>
 <div class="loader gone" id="loader"><div class="spin"></div></div>
