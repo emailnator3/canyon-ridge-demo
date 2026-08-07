@@ -75,6 +75,28 @@ for (const c of roster) {
   data.footer.copyright = `© ${new Date().getFullYear()} ${c.company}. All rights reserved.`;
   data.footer.areas_served = `${c.city} & surrounding areas`;
 
+  // hero{} and about{} are SEPARATE fields from business.tagline/description —
+  // easy to miss (they don't show up in the page <title>, only rendered into
+  // the H1/subheadline and About section), and the base template hardcodes
+  // Canyon Ridge Electric's own name/city into both.
+  data.hero.headline = `Your Trusted Electrical Experts in ${c.city}`;
+  data.hero.subheadline = `Serving ${c.city}, Oregon & surrounding areas with reliable, licensed electrical services for homes and businesses.`;
+  data.about.headline = `Why Choose ${c.company}?`;
+  data.about.text = `We're a locally owned and operated electrical company serving ${c.city}, Oregon and surrounding communities. Our licensed electricians bring years of experience, quality craftsmanship, and a commitment to customer satisfaction on every job — big or small.`;
+
+  // Safety net: catch any leftover Canyon Ridge Electric / Oregon City
+  // reference anywhere in the personalized data, so a missed field (like
+  // hero{}/about{} were the first time) fails loudly instead of shipping.
+  const dataText = JSON.stringify(data);
+  const leaks = [];
+  if (/Canyon Ridge/i.test(dataText)) leaks.push("Canyon Ridge");
+  if (/\bOregon City\b/.test(dataText) && c.city !== "Oregon City") leaks.push("Oregon City");
+  if (leaks.length) {
+    console.log(`LEAK in ${c.company}:`, leaks.join(", "));
+    process.exitCode = 1;
+    continue;
+  }
+
   const html = before + JSON.stringify(data) + after;
   const dir = path.join(outDir, slug);
   fs.mkdirSync(dir, { recursive: true });
@@ -84,5 +106,6 @@ for (const c of roster) {
 }
 
 fs.writeFileSync(path.join(__dirname, "pilot-results.json"), JSON.stringify(results, null, 2));
-console.log(`Generated ${results.length} personalized demos in biz/`);
+console.log(`Generated ${results.length}/${roster.length} personalized demos in biz/`);
+if (results.length === roster.length) console.log("ALL CLEAN — no leftover Canyon Ridge / Oregon City references.");
 console.log("Sample:", results[0].company, "->", results[0].demoPath);
