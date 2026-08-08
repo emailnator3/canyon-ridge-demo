@@ -23,7 +23,7 @@ function slugify(s) {
 // Extract the embedded data object from `renderWithData({...})` (brace-matched,
 // string-aware, same technique used in website-template/build-demo.js).
 function extractEmbeddedData(html) {
-  const marker = 'render({"business":';
+  const marker = 'renderWithData({"business":';
   const start = html.indexOf(marker);
   if (start === -1) throw new Error("marker not found");
   const openParen = html.indexOf("(", start);
@@ -118,7 +118,10 @@ for (const c of roster) {
 
   const dir = path.join(outDir, slug);
   fs.mkdirSync(dir, { recursive: true });
+  fs.mkdirSync(path.join(dir, "admin"), { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), html);
+  fs.writeFileSync(path.join(dir, "site-data.json"), JSON.stringify(data, null, 2));
+  fs.copyFileSync(path.join(__dirname, "admin", "index.html"), path.join(dir, "admin", "index.html"));
 
   results.push({ ...c, slug, demoPath: `/biz/${slug}/` });
 }

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0F172A; --surface: #1E293B; --border: #334155; --primary: #F59E0B; --text: #F8FAFC; --muted: #94A3B8; --danger: #EF4444; --success: #10B981; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; }
+
+    /* Top bar */
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .topbar h1 { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .topbar-actions { display: flex; gap: 0.5rem; }
+    .btn { padding: 8px 18px; border-radius: 8px; border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-primary { background: var(--primary); color: var(--bg); }
+    .btn-primary:hover { background: #D97706; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+    .toast { position: fixed; top: 1rem; right: 1rem; background: var(--success); color: white; padding: 12px 20px; border-radius: 10px; font-weight: 600; font-size: 0.85rem; z-index: 999; opacity: 0; transform: translateY(-10px); transition: all 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Layout */
+    .layout { display: flex; flex: 1; overflow: hidden; }
+    .sidebar { width: 420px; overflow-y: auto; border-right: 1px solid var(--border); background: var(--bg); flex-shrink: 0; }
+    .preview { flex: 1; background: #000; position: relative; }
+    .preview iframe { width: 100%; height: 100%; border: none; }
+    .preview-label { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: var(--muted); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 500; z-index: 2; }
+
+    /* Sections */
+    .section { border-bottom: 1px solid var(--border); }
+    .section-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; cursor: pointer; user-select: none; transition: background 0.15s; }
+    .section-header:hover { background: rgba(255,255,255,0.02); }
+    .section-header h2 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .section-header .arrow { color: var(--muted); font-size: 0.7rem; transition: transform 0.2s; }
+    .section-header.open .arrow { transform: rotate(90deg); }
+    .section-body { padding: 0 1.25rem 1.25rem; display: none; }
+    .section-body.open { display: block; }
+
+    /* Form elements */
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 9px 12px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.88rem; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--primary); }
+    .field textarea { min-height: 70px; resize: vertical; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .field small { color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; display: block; }
+
+    /* Color picker */
+    .color-field { display: flex; align-items: center; gap: 8px; }
+    .color-field input[type="color"] { width: 36px; height: 36px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; padding: 2px; background: var(--surface); }
+    .color-field input[type="text"] { flex: 1; }
+
+    /* List items */
+    .list-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; position: relative; }
+    .list-item .remove-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1rem; opacity: 0.6; transition: opacity 0.2s; }
+    .list-item .remove-btn:hover { opacity: 1; }
+    .add-btn { width: 100%; padding: 10px; background: rgba(245,158,11,0.06); border: 1px dashed rgba(245,158,11,0.25); border-radius: 10px; color: var(--primary); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .add-btn:hover { background: rgba(245,158,11,0.12); border-color: var(--primary); }
+
+    /* Logo preview */
+    .logo-preview { width: 60px; height: 60px; border-radius: 10px; border: 1px solid var(--border); object-fit: contain; margin-top: 0.4rem; background: var(--surface); }
+
+    @media (max-width: 900px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; height: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+      .preview { height: 50%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>⚡ Site Editor</h1>
+    <div class="topbar-actions">
+      <button class="btn btn-outline" onclick="exportJSON()">📥 Export JSON</button>
+      <button class="btn btn-primary" onclick="saveAndRefresh()">💾 Save & Preview</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="preview">
+      <div class="preview-label">Live Preview</div>
+      <iframe id="previewFrame" src="../index.html"></iframe>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved!</div>
+
+<script>
+let DATA = {};
+
+async function loadData() {
+  try {
+    const resp = await fetch('../site-data.json');
+    DATA = await resp.json();
+  } catch(e) {
+    DATA = { business: { name: 'My Business' }, colors: {}, hero: {}, images: {}, services: [], reviews: [], about: {}, hours: [], footer: {} };
+  }
+  buildSidebar();
+}
+
+function buildSidebar() {
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = '';
+
+  // ===== BUSINESS INFO =====
+  sb.innerHTML += section('Business Info', `
+    ${field('biz-name', 'Business Name', DATA.business.name)}
+    ${field('biz-tagline', 'Tagline', DATA.business.tagline)}
+    ${field('biz-category', 'Category', DATA.business.category, 'e.g. Electrician, Plumber')}
+    ${field('biz-phone', 'Phone', DATA.business.phone)}
+    ${field('biz-email', 'Email', DATA.business.email)}
+    ${field('biz-address', 'Address', DATA.business.address)}
+    <div class="field-row">
+      ${field('biz-rating', 'Rating', DATA.business.rating, '', 'number')}
+      ${field('biz-reviews', 'Review Count', DATA.business.review_count, '', 'number')}
+    </div>
+    <div class="field-row">
+      ${field('biz-lat', 'Latitude', DATA.business.latitude, '', 'number')}
+      ${field('biz-lng', 'Longitude', DATA.business.longitude, '', 'number')}
+    </div>
+    ${field('biz-gmaps', 'Google Maps URL', DATA.business.google_maps_url)}
+    ${field('biz-license', 'License Number', DATA.business.license_number, 'Optional')}
+  `, true);
+
+  // ===== LOGO & IMAGES =====
+  const imgs = DATA.images || {};
+  sb.innerHTML += section('Logo & Images', `
+    <div class="field">
+      <label>Company Logo URL</label>
+      <input type="text" id="biz-logo" value="${v(DATA.business.logo_url)}" placeholder="https://example.com/logo.png">
+      <small>Paste a URL to your logo. Shows in navbar. Leave blank for text logo.</small>
+      ${DATA.business.logo_url ? `<img class="logo-preview" src="${DATA.business.logo_url}" alt="Logo preview">` : ''}
+    </div>
+    ${field('img-hero', 'Hero Background Image', imgs.hero, 'URL for hero section background')}
+    ${field('img-about', 'About Section Image', imgs.about, 'URL for about section photo')}
+    <small style="color:var(--muted);display:block;margin-top:0.5rem">💡 Tip: Use free stock photos from <a href="https://unsplash.com" target="_blank" style="color:var(--primary)">Unsplash</a> or <a href="https://pexels.com" target="_blank" style="color:var(--primary)">Pexels</a></small>
+  `);
+
+  // ===== COLORS =====
+  const clr = DATA.colors || {};
+  sb.innerHTML += section('Colors', `
+    ${colorField('clr-primary', 'Primary (Accent)', clr.primary)}
+    ${colorField('clr-primaryDark', 'Primary Dark', clr.primaryDark)}
+    ${colorField('clr-bg', 'Background', clr.background)}
+    ${colorField('clr-surface', 'Surface (Cards)', clr.surface)}
+    ${colorField('clr-text', 'Text', clr.text)}
+    ${colorField('clr-textMuted', 'Muted Text', clr.textMuted)}
+    ${colorField('clr-accent', 'Accent', clr.accent)}
+    ${colorField('clr-secondary', 'Secondary', clr.secondary)}
+  `);
+
+  // ===== HERO =====
+  const hr = DATA.hero || {};
+  sb.innerHTML += section('Hero Section', `
+    ${field('hero-headline', 'Headline', hr.headline)}
+    ${textarea('hero-sub', 'Subheadline', hr.subheadline)}
+    ${field('hero-cta', 'CTA Button Text', hr.cta_text)}
+  `);
+
+  // ===== SERVICES =====
+  let svcHTML = (DATA.services || []).map((sv, i) => `
+    <div class="list-item" data-svc="${i}">
+      <button class="remove-btn" onclick="removeSvc(${i})">✕</button>
+      ${field(`svc-icon-${i}`, 'Icon (emoji)', sv.icon)}
+      ${field(`svc-title-${i}`, 'Title', sv.title)}
+      ${textarea(`svc-desc-${i}`, 'Description', sv.description)}
+      ${field(`svc-img-${i}`, 'Image URL', sv.image, 'Optional stock photo URL')}
+    </div>`).join('');
+  svcHTML += `<button class="add-btn" onclick="addSvc()">+ Add Service</button>`;
+  sb.innerHTML += section('Services', svcHTML);
+
+  // ===== REVIEWS =====
+  let revHTML = (DATA.reviews || []).map((rv, i) => `
+    <div class="list-item" data-rev="${i}">
+      <button class="remove-btn" onclick="removeRev(${i})">✕</button>
+      <div class="field-row">
+        ${field(`rev-author-${i}`, 'Author', rv.author)}
+        ${field(`rev-rating-${i}`, 'Rating', rv.rating, '', 'number')}
+      </div>
+      ${textarea(`rev-text-${i}`, 'Review Text', rv.text)}
+    </div>`).join('');
+  revHTML += `<button class="add-btn" onclick="addRev()">+ Add Review</button>`;
+  sb.innerHTML += section('Reviews', revHTML);
+
+  // ===== ABOUT =====
+  const abt = DATA.about || {};
+  let featHTML = (abt.features || []).map((f, i) => `
+    <div style="display:flex;gap:6px;margin-bottom:6px;align-items:center">
+      <input type="text" id="feat-${i}" value="${v(f)}" style="flex:1;padding:8px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem">
+      <button onclick="removeFeat(${i})" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:0.9rem;opacity:0.6">✕</button>
+    </div>`).join('');
+  featHTML += `<button class="add-btn" onclick="addFeat()" style="margin-top:0.25rem">+ Add Feature</button>`;
+  sb.innerHTML += section('About', `
+    ${field('about-headline', 'Headline', abt.headline)}
+    ${textarea('about-text', 'Description', abt.text)}
+    <div class="field"><label>Trust Badges / Features</label>${featHTML}</div>
+  `);
+
+  // ===== HOURS =====
+  let hrsHTML = (DATA.hours || []).map((h, i) => `
+    <div style="display:flex;gap:6px;margin-bottom:6px;align-items:center">
+      <input type="text" id="hr-${i}" value="${v(h)}" style="flex:1;padding:8px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem" placeholder="Monday: 9:00 AM – 5:00 PM">
+      <button onclick="removeHr(${i})" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:0.9rem;opacity:0.6">✕</button>
+    </div>`).join('');
+  hrsHTML += `<button class="add-btn" onclick="addHr()" style="margin-top:0.25rem">+ Add Hours</button>`;
+  sb.innerHTML += section('Business Hours', `<div class="field"><label>Hours</label>${hrsHTML}</div>`);
+
+  // ===== FOOTER =====
+  const ft = DATA.footer || {};
+  sb.innerHTML += section('Footer', `
+    ${field('foot-copy', 'Copyright Text', ft.copyright)}
+    ${field('foot-areas', 'Areas Served', ft.areas_served)}
+  `);
+
+  // Wire up section toggles
+  document.querySelectorAll('.section-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.classList.toggle('open');
+      h.nextElementSibling.classList.toggle('open');
+    });
+  });
+
+  // Wire up color sync
+  document.querySelectorAll('.color-field').forEach(cf => {
+    const ci = cf.querySelector('input[type="color"]');
+    const ti = cf.querySelector('input[type="text"]');
+    ci.addEventListener('input', () => { ti.value = ci.value; });
+    ti.addEventListener('input', () => { if(/^#[0-9a-fA-F]{6}$/.test(ti.value)) ci.value = ti.value; });
+  });
+}
+
+/* Helpers */
+function v(val) { return val != null ? String(val).replace(/"/g, '&quot;') : ''; }
+function section(title, body, startOpen=false) {
+  return `<div class="section">
+    <div class="section-header ${startOpen?'open':''}"><h2>${title}</h2><span class="arrow">▶</span></div>
+    <div class="section-body ${startOpen?'open':''}">${body}</div>
+  </div>`;
+}
+function field(id, label, val, hint='', type='text') {
+  return `<div class="field"><label>${label}</label><input type="${type}" id="${id}" value="${v(val)}" ${type==='number'?'step="any"':''}>${hint?`<small>${hint}</small>`:''}</div>`;
+}
+function textarea(id, label, val) {
+  return `<div class="field"><label>${label}</label><textarea id="${id}">${v(val)}</textarea></div>`;
+}
+function colorField(id, label, val) {
+  const c = val || '#F59E0B';
+  return `<div class="field"><label>${label}</label><div class="color-field"><input type="color" value="${c}"><input type="text" id="${id}" value="${v(val)}"></div></div>`;
+}
+
+/* Collect data */
+function collect() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  const gn = id => { const v = g(id); return v ? parseFloat(v) : null; };
+
+  DATA.business = {
+    name: g('biz-name'), tagline: g('biz-tagline'), category: g('biz-category'),
+    description: DATA.business.description || '',
+    phone: g('biz-phone'), email: g('biz-email'), address: g('biz-address'),
+    website: DATA.business.website || '',
+    rating: gn('biz-rating'), review_count: gn('biz-reviews') || parseInt(g('biz-reviews')) || 0,
+    latitude: gn('biz-lat'), longitude: gn('biz-lng'),
+    google_maps_url: g('biz-gmaps'), logo_url: g('biz-logo'),
+    license_number: g('biz-license')
+  };
+  DATA.images = { hero: g('img-hero'), about: g('img-about') };
+  DATA.colors = {
+    primary: g('clr-primary'), primaryDark: g('clr-primaryDark'),
+    secondary: g('clr-secondary'), accent: g('clr-accent'),
+    background: g('clr-bg'), surface: g('clr-surface'),
+    text: g('clr-text'), textMuted: g('clr-textMuted')
+  };
+  DATA.hero = { headline: g('hero-headline'), subheadline: g('hero-sub'), cta_text: g('hero-cta') };
+
+  // Services
+  DATA.services = [];
+  document.querySelectorAll('[data-svc]').forEach((el, i) => {
+    DATA.services.push({
+      icon: g(`svc-icon-${i}`), title: g(`svc-title-${i}`),
+      description: g(`svc-desc-${i}`), image: g(`svc-img-${i}`)
+    });
+  });
+
+  // Reviews
+  DATA.reviews = [];
+  document.querySelectorAll('[data-rev]').forEach((el, i) => {
+    DATA.reviews.push({
+      author: g(`rev-author-${i}`), rating: gn(`rev-rating-${i}`) || 5, text: g(`rev-text-${i}`)
+    });
+  });
+
+  // About
+  const feats = [];
+  let fi = 0;
+  while (document.getElementById(`feat-${fi}`)) { const fv = g(`feat-${fi}`); if(fv) feats.push(fv); fi++; }
+  DATA.about = { headline: g('about-headline'), text: g('about-text'), features: feats };
+
+  // Hours
+  const hours = [];
+  let hi = 0;
+  while (document.getElementById(`hr-${hi}`)) { const hv = g(`hr-${hi}`); if(hv) hours.push(hv); hi++; }
+  DATA.hours = hours;
+
+  DATA.footer = { copyright: g('foot-copy'), areas_served: g('foot-areas') };
+}
+
+/* List actions */
+function addSvc() { DATA.services = DATA.services || []; collect(); DATA.services.push({ icon:'⚡', title:'New Service', description:'Service description', image:'' }); buildSidebar(); }
+function removeSvc(i) { collect(); DATA.services.splice(i,1); buildSidebar(); }
+function addRev() { DATA.reviews = DATA.reviews || []; collect(); DATA.reviews.push({ author:'New Customer', rating:5, text:'Great service!' }); buildSidebar(); }
+function removeRev(i) { collect(); DATA.reviews.splice(i,1); buildSidebar(); }
+function addFeat() { collect(); DATA.about.features = DATA.about.features || []; DATA.about.features.push('New Feature'); buildSidebar(); }
+function removeFeat(i) { collect(); DATA.about.features.splice(i,1); buildSidebar(); }
+function addHr() { collect(); DATA.hours = DATA.hours || []; DATA.hours.push('Day: Time'); buildSidebar(); }
+function removeHr(i) { collect(); DATA.hours.splice(i,1); buildSidebar(); }
+
+/* Save */
+function saveAndRefresh() {
+  collect();
+  const frame = document.getElementById('previewFrame');
+  // Reload with inline data
+  frame.contentWindow.postMessage({ type: 'reload', data: DATA }, '*');
+  // Fallback: just reload
+  frame.src = frame.src.split('?')[0] + '?' + Date.now();
+  showToast('Saved & refreshed!');
+}
+
+function exportJSON() {
+  collect();
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'site-data.json';
+  a.click();
+  showToast('JSON exported!');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+loadData();
+</script>
+</body>
+</html>
