@@ -11,6 +11,10 @@ const path = require("path");
 const roster = JSON.parse(fs.readFileSync(path.join(__dirname, "pilot-roster.json"), "utf8"));
 const baseHtml = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
+function escapeHtml(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function slugify(s) {
   return s
     .toLowerCase()
@@ -97,7 +101,30 @@ for (const c of roster) {
     continue;
   }
 
-  let html = before + JSON.stringify(data) + after;
+  // The <title> and <meta name="description"> tags are static HTML, not part
+  // of the render()'d data — JS corrects them after load, but the raw HTML
+  // (what search engines and link-preview cards see first) still said Canyon
+  // Ridge Electric until this replacement runs.
+  const staticTitle = "Canyon Ridge Electric — Your Trusted Electrical Experts in Oregon City";
+  const staticDesc = 'Serving Oregon City, Oregon &amp; surrounding areas with reliable, licensed electrical services for homes and businesses.';
+  const newTitle = `${escapeHtml(c.company)} — Your Trusted Electrical Experts in ${escapeHtml(c.city)}`;
+  const newDesc = escapeHtml(data.business.description);
+
+  let companyBefore = before;
+  for (const [oldStr, newStr, label] of [
+    [`<title>${staticTitle}</title>`, `<title>${newTitle}</title>`, "title"],
+    [`content="${staticDesc}"`, `content="${newDesc}"`, "meta description"],
+  ]) {
+    const count = companyBefore.split(oldStr).length - 1;
+    if (count !== 1) {
+      console.log(`WARN ${c.company}: expected 1 occurrence of static ${label}, found ${count}`);
+      process.exitCode = 1;
+      continue;
+    }
+    companyBefore = companyBefore.split(oldStr).join(newStr);
+  }
+
+  let html = companyBefore + JSON.stringify(data) + after;
 
   // Tag both Buy Now links with this company's slug so a Stripe payment can be
   // traced back to which contractor's demo it came from (Stripe payment links
