@@ -72,6 +72,7 @@ fs.mkdirSync(path.join(outDir, "admin"), { recursive: true });
 
 fs.writeFileSync(path.join(outDir, "index.html"), html);
 fs.writeFileSync(path.join(outDir, "site-data.json"), JSON.stringify(data, null, 2));
+fs.copyFileSync(path.join(__dirname, "middleware.js"), path.join(outDir, "middleware.js"));
 fs.copyFileSync(path.join(__dirname, "admin", "index.html"), path.join(outDir, "admin", "index.html"));
 
 const readme = `# ${data.business.name} — Website
@@ -115,6 +116,18 @@ or \`www\`). The site works on any standard web hosting provider.
 4. Replace the old \`site-data.json\` with the new one and re-upload to your host
 
 That's it! No coding required.
+
+## Password-protect your admin panel (Vercel only)
+
+This package includes \`middleware.js\`, which locks \`/admin\` behind a login
+prompt — but only if you deploy on **Vercel** (Option A above). After you
+deploy:
+1. Go to your project in the Vercel dashboard → **Settings → Environment Variables**
+2. Add \`ADMIN_USER\` and \`ADMIN_PASSWORD\` with values you choose
+3. Redeploy — visiting \`/admin\` now asks for that login first
+
+If you deploy elsewhere (Netlify, shared hosting), \`middleware.js\` has no
+effect there — keep your \`/admin\` URL private instead.
 
 ## Need Help?
 
