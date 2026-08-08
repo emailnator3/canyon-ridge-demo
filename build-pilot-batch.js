@@ -47,6 +47,28 @@ const baseData = JSON.parse(baseObjText);
 const before = baseHtml.slice(0, start);
 const after = baseHtml.slice(end);
 
+// Generic stock photo replacing Canyon Ridge Electric's real jobsite hero
+// photo (base64-embedded, ~275KB) — reused from elsewhere in this same
+// template (the Panel Upgrades service photo) so it's proven to load.
+const GENERIC_HERO_URL = "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=1600&q=72&auto=format&fit=crop";
+
+// The static HTML ships the hero photo TWICE outside the JSON data (a CSS
+// background-image and a plain <img src>) — JS overwrites both after
+// render() runs, but the raw markup (what a crawler or a screenshot taken
+// before JS finishes would see) still shows Canyon Ridge Electric's real
+// photo unless these are also replaced.
+const heroDataUriMarker = "data:image/jpeg;base64,";
+const heroDataUriStart = before.indexOf(heroDataUriMarker);
+if (heroDataUriStart === -1) throw new Error("static hero data URI not found in before-HTML");
+const heroDataUriEndQuote = before.indexOf('"', heroDataUriStart);
+const heroDataUriEndEntity = before.indexOf("&quot;", heroDataUriStart);
+const heroDataUriEnd = heroDataUriEndEntity !== -1 && heroDataUriEndEntity < heroDataUriEndQuote ? heroDataUriEndEntity : heroDataUriEndQuote;
+const staticHeroDataUri = before.slice(heroDataUriStart, heroDataUriEnd);
+const staticHeroOccurrences = before.split(staticHeroDataUri).length - 1;
+if (staticHeroOccurrences !== 2) {
+  throw new Error(`expected the static hero data URI twice in before-HTML, found ${staticHeroOccurrences}`);
+}
+
 const genericReviews = [
   { author: "J. Martinez", rating: 5, text: "Showed up when they said they would and the work was clean and professional.", date: "" },
   { author: "S. Nguyen", rating: 5, text: "Explained everything clearly before starting and the pricing was fair.", date: "" },
@@ -76,6 +98,14 @@ for (const c of roster) {
   data.business.logo_url = "";
   data.business.license_number = c.licenseNumber || "";
   data.reviews = genericReviews;
+
+  // The hero photo was Canyon Ridge Electric's own real jobsite photo
+  // (base64-embedded) — showing it under 24 other companies' names would
+  // misrepresent someone else's work as theirs, same issue already avoided
+  // for reviews. Swap in a generic stock photo already used elsewhere on
+  // this same template (about/services), so it's proven to load and stays
+  // thematically consistent.
+  data.images.hero = GENERIC_HERO_URL;
   data.footer.copyright = `© ${new Date().getFullYear()} ${c.company}. All rights reserved.`;
   data.footer.areas_served = `${c.city} & surrounding areas`;
 
@@ -122,6 +152,14 @@ for (const c of roster) {
       continue;
     }
     companyBefore = companyBefore.split(oldStr).join(newStr);
+  }
+
+  const heroCount = companyBefore.split(staticHeroDataUri).length - 1;
+  if (heroCount !== 2) {
+    console.log(`WARN ${c.company}: expected 2 occurrences of static hero data URI, found ${heroCount}`);
+    process.exitCode = 1;
+  } else {
+    companyBefore = companyBefore.split(staticHeroDataUri).join(GENERIC_HERO_URL);
   }
 
   let html = companyBefore + JSON.stringify(data) + after;
