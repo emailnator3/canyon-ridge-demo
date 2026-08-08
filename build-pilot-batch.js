@@ -97,7 +97,25 @@ for (const c of roster) {
     continue;
   }
 
-  const html = before + JSON.stringify(data) + after;
+  let html = before + JSON.stringify(data) + after;
+
+  // Tag both Buy Now links with this company's slug so a Stripe payment can be
+  // traced back to which contractor's demo it came from (Stripe payment links
+  // pass ?client_reference_id=... straight through to the Checkout Session).
+  const buyLinks = [
+    "https://buy.stripe.com/6oUdRaaP1gkr1Ahasc00000",
+    "https://buy.stripe.com/14A7sM2ivc4ba6Nbwg00001",
+  ];
+  for (const link of buyLinks) {
+    const before_ = html;
+    html = html.split(link).join(`${link}?client_reference_id=${slug}`);
+    const count = before_.split(link).length - 1;
+    if (count !== 1) {
+      console.log(`WARN ${c.company}: expected 1 occurrence of ${link}, found ${count}`);
+      process.exitCode = 1;
+    }
+  }
+
   const dir = path.join(outDir, slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), html);
