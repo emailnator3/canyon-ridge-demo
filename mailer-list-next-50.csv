@@ -1,0 +1,26 @@
+Tier,Company,City,State,Zip,License #,Address,Phone,Email,Notes
+A - Ready to mail,Advanced Electrical Contractors LLC,Central Point,OR,97502,C1025,"191 Wilson Rd, Central Point, OR 97502",(541) 816-7951,,
+A - Ready to mail,Advanced Electrical Services LLC,Merlin,OR,97532,C732,"184 Harley Ln, Merlin, OR 97532",(541) 761-1670,,Candidate website domain found does not resolve — treated as no live site
+A - Ready to mail,Advanced Electrical Solutions LLC,Eugene,OR,97408,C2058,"92385 Powerline Rd, Eugene, OR 97408-9405",(503) 757-6405,,
+A - Ready to mail,Agee Electric,Redmond,OR,97756,C890,"1667 NW Rimrock Ct, Redmond, OR 97756-0311",(541) 604-4485,,Owner: Richard Brian Agee
+A - Ready to mail,All Electric Service,Tidewater,OR,97390,21-94C,"13394 East Alsea Highway, Tidewater, OR 97390",(541) 528-3684,,BBB also lists a PO Box 132 mailing address
+A - Ready to mail,All In One Electric LLC,Corvallis,OR,97333,C928,"5060 SW Philomath Blvd, Corvallis, OR 97333",(541) 753-4716,,High confidence — license matched directly via permit records
+A - Ready to mail,All Power Electric,Salem,OR,97304,C383,"3800 Wallace Rd NW, Salem, OR",(503) 551-8378,allpower@comcast.net,FLAG: a directory listed a different license # for this business — verify C383 before mailing
+A - Ready to mail,Allen Electric Of Jackson County INC,Eagle Point,OR,97524,C170,"33 Nick Young Rd, Eagle Point, OR",(541) 826-7625,,In business ~20 years per directory listings
+A - Ready to mail,Alpine Electrical Of Oregon INC,Salem,OR,97317,C1045,"8107 State St, Salem, OR 97317",(503) 991-9601,,BBB links a website domain that is dead/non-resolving — treated as no live site
+A - Ready to mail,Alsea Electric LLC,Waldport,OR,97394,C1640,"458 SE Moffitt Rd, Waldport, OR 97394",(541) 527-0700,,Strong candidate — matched via OR Secretary of State registration
+A - Ready to mail,Arm & Amps Electric LLC,Hillsboro,OR,97123,C2017,"7987 SE Engelmann St, Hillsboro, OR 97123",(907) 687-1077,,Phone has an Alaska area code — unusual but is what the state has on file
+A - Ready to mail,Armored Electric Company LLC,Eugene,OR,97401,C1819,"15 Rustic Pl, Eugene, OR 97401",(541) 729-4848,,"IMPORTANT: armoredelectric.com belongs to an unrelated same-named company in Gallup, NM — do not use that site's info"
+A - Ready to mail,Arnzen Electric LLC,Salem,OR,97305,C768,"8466 75th Ave NE, Salem, OR 97305",(503) 551-0795,,Owner: Brian Arnzen
+B - Verify first,Advanced Wiring Services INC,Clackamas,OR,97015,C7,"35148 S Sawtell Rd, Molalla, OR 97038-8875",(503) 833-2980,,"FLAG: real address (Molalla) differs from the city/zip on file (Clackamas) — some directories show a PO Box 644, Clackamas 97015 instead"
+B - Verify first,Alfa Electric,Beaverton,OR,97078,34-443C,"7146 SW 158th Ave, Beaverton, OR 97007-4991",(503) 804-2090,,"FLAG: BBB states this business is ""believed to be out of business"" — call to confirm before mailing"
+B - Verify first,Alpha Associates Services LLP,Albany,OR,97321,C1138,"2813 Pacific Blvd SW, Albany, OR 97321 (a second source lists 2460 W 11th Ave, Eugene, OR 97402)",(541) 928-7561,mike.helms@alpha-associates-svcs.com,"FLAG: two conflicting addresses found — no independent company website, only a Facebook page"
+B - Verify first,All Phase Electrical,La Grande,OR,97850,C721,"808 4th St, La Grande, OR 97850 (alt: 224 Elkhorn Dr per one federal-vendor listing)",(541) 963-3000,,"FLAG: found entity is registered as ""All Phase Electrical Construction Inc/LLC"" — identity match to license C721 not independently confirmed"
+B - Verify first,Anderson Electric,Salem,OR,97302,C832,"4742 Liberty Rd S # 376, Salem, OR 97302-5037",(503) 931-3267,,"FLAG: ""#376"" may be a mailbox-service suite rather than a physical shop — worth a Street View check"
+B - Verify first,Angus Electric,Tillamook,OR,97141,C210,"2 Main Ave, Tillamook, OR 97141",(503) 815-8145,,FLAG: license not found in the state's current active-license dataset — confirm still operating
+B - Verify first,Applecross Electric,Days Creek,OR,97429,20-120C,"4483 Corn Creek Rd, Days Creek, OR 97429",(541) 825-3557,,FLAG: license appears inactive/expired on third-party lookups — confirm still operating
+C - No contact info found,Accomplished Electric,Hines,OR,97738,C2001,,,,not found anywhere searched
+C - No contact info found,Active Electric LLC,Gresham,OR,97030,C2185,,,,not found anywhere searched
+C - No contact info found,All Circuits Electric LLC,Ashland,OR,97520,C2024,,,,not found anywhere searched
+C - No contact info found,All Phaze Electric LLC,Central Point,OR,97502,C1733,,,,License itself confirmed real via permit records — just no contact info found anywhere
+C - No contact info found,Ad Secondary Systems LLC,Fall Creek,OR,97438,C2044,,(503) 507-7352,,"Phone found, but no street address located anywhere"
