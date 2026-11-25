@@ -20,6 +20,8 @@ offers every electrician exam in Spanish.
 | `02-reviewer-recruitment.md` | Find a bilingual licensed electrician to check the Spanish | Post this week |
 | `03-muestra-calculos-10.md` | 10 free sample questions (bilingual) | Check answers, then post as free sample |
 | `04-preguntas-11-50.md` | Questions 11–50 — with 1–10 this makes the full 50-question paid product | Check answers + reviewer, then build PDF/Form |
+| `05-simulacro-completo-50.md` | All 50 combined for buyers: cover page → questions → answer key → worked solutions (internal ⚠ notes removed) | Generated — don't edit; edit 03/04 and rebuild |
+| `simulacro-completo-50-BORRADOR.pdf` | Print-ready draft PDF (18 pages) with a red DRAFT box on page 1 | Remove the draft box once both checks are done |
 
 ## The weekly system (target: 7–9 hrs/week of your time)
 | Step | Who does it | Your time/week |
