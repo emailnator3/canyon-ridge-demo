@@ -62,15 +62,15 @@ device rating (device not listed for 100% operation)?
 ### 4.
 **ES:** Una vivienda unifamiliar de 2,000 pies². Incluya alumbrado general, 2 circuitos de
 pequeños electrodomésticos y 1 circuito de lavandería. Aplicando los factores de demanda,
-¿cuál es la carga neta?
+¿cuál es la carga neta para el cálculo del servicio?
 
 **EN:** A 2,000 sq ft single-family dwelling. Include general lighting, two small-appliance
-circuits, and one laundry circuit. After demand factors, what is the net load?
+circuits, and one laundry circuit. After demand factors, what is the net load for the service calculation?
 
 - A) 4,500 VA
-- B) 5,625 VA
-- C) 6,000 VA
-- D) 10,500 VA
+- B) 4,925 VA
+- C) 5,625 VA
+- D) 8,500 VA
 
 ### 5.
 **ES:** Seis conductores portadores de corriente THHN de cobre calibre 12 AWG están en la misma
@@ -371,8 +371,8 @@ aplicar la demanda?
 
 - A) 12,000 VA
 - B) 15,000 VA
-- C) 18,000 VA
-- D) 22,000 VA
+- C) 16,800 VA
+- D) 18,000 VA
 
 ### 33.
 **ES:** La demanda de una estufa es 8 kW. ¿Qué carga se usa para el **neutro** del alimentador/servicio?
@@ -599,11 +599,13 @@ I = P ÷ E = 1,500 ÷ 120 = **12.5 A**.
 40 A × 125% = **50 A**. Ref: 210.20(A).
 
 ### 4.
-**Respuesta: B — 5,625 VA**
-Alumbrado: 2,000 × 3 VA = 6,000 VA. Pequeños electrodomésticos: 2 × 1,500 = 3,000 VA.
-Lavandería: 1,500 VA. Total = 10,500 VA.
-Primeros 3,000 VA al 100% = 3,000. Resto 7,500 × 35% = 2,625. Neto = **5,625 VA**.
-Ref: Artículo 220.
+**Respuesta: B — 4,925 VA**
+Alumbrado: 2,000 × 2 VA = 4,000 VA. Pequeños electrodomésticos: 2 × 1,500 = 3,000 VA.
+Lavandería: 1,500 VA. Total = 8,500 VA.
+Primeros 3,000 VA al 100% = 3,000. Resto 5,500 × 35% = 1,925. Neto = **4,925 VA**.
+Cuidado: en el NEC 2026 la carga de alumbrado para alimentador/servicio bajó de 3 a **2 VA/pie²**.
+Los 3 VA/pie² siguen usándose solo para contar circuitos ramales (120.13). La respuesta C usa el valor viejo.
+Ref: 120.41 y factores de demanda del Artículo 120.
 
 ### 5.
 **Respuesta: B — 24 A**
@@ -629,7 +631,7 @@ kVA = (E × I × 1.732) ÷ 1,000 = (208 × 40 × 1.732) ÷ 1,000 = **14.4 kVA**.
 
 ### 10.
 **Respuesta: B — 5,000 W**
-Se usa 5,000 W o la placa de datos, lo que sea mayor. Ref: 220.54.
+Se usa 5,000 W o la placa de datos, lo que sea mayor. Ref: 120.54.
 
 ### 11.
 **Respuesta: C — 20.0 pulg³.** Conductores 6 + tierras 1 + abrazadera 1 + interruptor 2 = 10 × 2.00 = **20.0 pulg³**.
@@ -687,26 +689,27 @@ Ref: Cap. 9, Tabla 8.
 10 AWG = 10,380 (muy chico); 8 AWG = 16,510 → **8 AWG**. Ref: Cap. 9, Tabla 8.
 
 ### 27.
-**Respuesta: B — 8 kW.** Tabla 220.55, Columna C, 1 aparato = **8 kW**.
+**Respuesta: B — 8 kW.** Tabla 120.55, Columna C, 1 aparato = **8 kW**.
 
 ### 28.
 **Respuesta: C — 8.8 kW.** Excede 12 kW por 2 kW → aumentar Columna C 5% por cada kW = 10%.
-8 × 1.10 = **8.8 kW**. Ref: Tabla 220.55, Nota 1.
+8 × 1.10 = **8.8 kW**. Ref: Tabla 120.55, Nota 1.
 
 ### 29.
-**Respuesta: B — 6,000 VA.** Total 8,000 VA. 4 o más aparatos = 75%. 8,000 × 0.75 = **6,000 VA**. Ref: 220.53.
+**Respuesta: B — 6,000 VA.** Total 8,000 VA. 4 o más aparatos = 75%. 8,000 × 0.75 = **6,000 VA**. Ref: 120.53.
 
 ### 30.
-**Respuesta: B — 10 kW.** Cargas no coincidentes: se usa la mayor. Ref: 220.60.
+**Respuesta: B — 10 kW.** Cargas no coincidentes: se usa la mayor. Ref: 120.60.
 
 ### 31.
 **Respuesta: B — 140 A.** 33,600 ÷ 240 = **140 A**.
 
 ### 32.
-**Respuesta: C — 18,000 VA.** Primeros 10,000 VA al 100% + 20,000 × 40% = 8,000 → **18,000 VA**. Ref: 220.82(B).
+**Respuesta: C — 16,800 VA.** Primeros 8,000 VA al 100% + 22,000 × 40% = 8,800 → **16,800 VA**. Ref: 120.82(B).
+Cuidado: en el NEC 2026 el primer bloque al 100% bajó de 10 kVA a **8 kVA**. La respuesta D usa el valor viejo.
 
 ### 33.
-**Respuesta: B — 5,600 W.** 8,000 × 70% = **5,600 W**. Ref: 220.61(B)(1).
+**Respuesta: B — 5,600 W.** 8,000 × 70% = **5,600 W**. Ref: 120.61(B)(1).
 
 ### 34.
 **Respuesta: B — 90.2 A.** 75,000 ÷ (480 × 1.732) = **90.2 A**.
@@ -731,24 +734,24 @@ Ref: 450.3(B), Tabla 450.3(B) Nota 1, 240.6(A).
 **Respuesta: A — 6 AWG.** A una varilla, no se requiere más grande que 6 AWG cobre. Ref: 250.66(A).
 
 ### 41.
-**Respuesta: B — 9,000 VA.** 50 × 180 VA = **9,000 VA**. Ref: 220.14(I).
+**Respuesta: B — 9,000 VA.** 50 × 180 VA = **9,000 VA**. Ref: 120.14(I).
 
 ### 42.
 **Respuesta: B — 12,200 VA.** 80 × 180 = 14,400 VA. Primeros 10,000 al 100% + 4,400 × 50% = 2,200 → **12,200 VA**.
-Ref: 220.44.
+Ref: 120.44.
 
 ### 43.
-**Respuesta: C — 6,000 VA.** 30 × 200 VA por pie = **6,000 VA**. Ref: 220.14(G).
+**Respuesta: C — 6,000 VA.** 30 × 200 VA por pie = **6,000 VA**. Ref: 120.14(G).
 
 ### 44.
-**Respuesta: C — 1,200 VA.** Ref: 220.14(F), 600.5.
+**Respuesta: C — 1,200 VA.** Ref: 120.14(F), 600.5.
 
 ### 45.
 **Respuesta: B — 13,000 VA.** 10,000 × 1.3 VA/pie² = **13,000 VA**.
-Ref: Tabla 220.42(A)
+Ref: Tabla 120.42(A)
 
 ### 46.
-**Respuesta: C — 13.** (20 × 120) ÷ 180 = 13.3 → **13** (siempre redondear hacia abajo). Ref: 220.14(I).
+**Respuesta: C — 13.** (20 × 120) ÷ 180 = 13.3 → **13** (siempre redondear hacia abajo). Ref: 120.14(I).
 
 ### 47.
 **Respuesta: B — 16 A.** 20 × 80% = **16 A** (lo inverso de 125%). Ref: 210.20(A).

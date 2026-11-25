@@ -53,18 +53,19 @@ A) 40 A  B) 45 A  C) 50 A  D) 60 A
 ### 4. Cálculo de vivienda / Dwelling demand ⚠
 **ES:** Una vivienda unifamiliar de 2,000 pies². Incluya alumbrado general, 2 circuitos de
 pequeños electrodomésticos y 1 circuito de lavandería. Aplicando los factores de demanda,
-¿cuál es la carga neta?
+¿cuál es la carga neta para el cálculo del servicio?
 **EN:** A 2,000 sq ft single-family dwelling. Include general lighting, two small-appliance
-circuits, and one laundry circuit. After demand factors, what is the net load?
+circuits, and one laundry circuit. After demand factors, what is the net load for the service calculation?
 
-A) 4,500 VA  B) 5,625 VA  C) 6,000 VA  D) 10,500 VA
+A) 4,500 VA  B) 4,925 VA  C) 5,625 VA  D) 8,500 VA
 
-**Respuesta: B — 5,625 VA**
-Alumbrado: 2,000 × 3 VA = 6,000 VA. Pequeños electrodomésticos: 2 × 1,500 = 3,000 VA.
-Lavandería: 1,500 VA. Total = 10,500 VA.
-Primeros 3,000 VA al 100% = 3,000. Resto 7,500 × 35% = 2,625. Neto = **5,625 VA**.
-Ref: Artículo 220 — ⚠ **verify the table numbers in 2026** (the general-lighting and
-lighting-demand tables were renumbered in 2023).
+**Respuesta: B — 4,925 VA**
+Alumbrado: 2,000 × 2 VA = 4,000 VA. Pequeños electrodomésticos: 2 × 1,500 = 3,000 VA.
+Lavandería: 1,500 VA. Total = 8,500 VA.
+Primeros 3,000 VA al 100% = 3,000. Resto 5,500 × 35% = 1,925. Neto = **4,925 VA**.
+Cuidado: en el NEC 2026 la carga de alumbrado para alimentador/servicio bajó de 3 a **2 VA/pie²**.
+Los 3 VA/pie² siguen usándose solo para contar circuitos ramales (120.13). La respuesta C usa el valor viejo.
+Ref: 120.41 y factores de demanda del Artículo 120 — ⚠ **verify the lighting demand-factor table number in 2026**.
 
 ---
 
@@ -139,7 +140,7 @@ calculation?
 A) 4,500 W  B) 5,000 W  C) 5,625 W  D) 6,000 W
 
 **Respuesta: B — 5,000 W**
-Se usa 5,000 W o la placa de datos, lo que sea mayor. Ref: 220.54.
+Se usa 5,000 W o la placa de datos, lo que sea mayor. Ref: 120.54.
 
 ---
 

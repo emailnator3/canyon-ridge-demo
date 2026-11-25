@@ -193,7 +193,7 @@ A) 12 AWG  B) 10 AWG  C) 8 AWG  D) 6 AWG
 
 A) 6 kW  B) 8 kW  C) 9.6 kW  D) 12 kW
 
-**Respuesta: B — 8 kW.** Tabla 220.55, Columna C, 1 aparato = **8 kW** ⚠ (verificar número de tabla).
+**Respuesta: B — 8 kW.** Tabla 120.55, Columna C, 1 aparato = **8 kW** ⚠ (verificar número de tabla).
 
 ### 28. ⚠
 **ES:** Una vivienda tiene una estufa de 14 kW. ¿Carga de demanda?
@@ -202,7 +202,7 @@ A) 6 kW  B) 8 kW  C) 9.6 kW  D) 12 kW
 A) 8.0 kW  B) 8.4 kW  C) 8.8 kW  D) 11.2 kW
 
 **Respuesta: C — 8.8 kW.** Excede 12 kW por 2 kW → aumentar Columna C 5% por cada kW = 10%.
-8 × 1.10 = **8.8 kW**. Ref: Tabla 220.55, Nota 1 ⚠.
+8 × 1.10 = **8.8 kW**. Ref: Tabla 120.55, Nota 1 ⚠.
 
 ### 29.
 **ES:** Una vivienda tiene 4 aparatos fijos: calentador de agua 4,500 VA, lavaplatos 1,200 VA, triturador 900 VA,
@@ -212,7 +212,7 @@ well pump 1,400 VA. Demand load?
 
 A) 4,000 VA  B) 6,000 VA  C) 7,200 VA  D) 8,000 VA
 
-**Respuesta: B — 6,000 VA.** Total 8,000 VA. 4 o más aparatos = 75%. 8,000 × 0.75 = **6,000 VA**. Ref: 220.53.
+**Respuesta: B — 6,000 VA.** Total 8,000 VA. 4 o más aparatos = 75%. 8,000 × 0.75 = **6,000 VA**. Ref: 120.53.
 
 ### 30.
 **ES:** Una vivienda tiene calefacción eléctrica de 10 kW y aire acondicionado de 5 kW que nunca funcionan al mismo
@@ -221,7 +221,7 @@ tiempo. ¿Qué carga se usa?
 
 A) 5 kW  B) 10 kW  C) 12.5 kW  D) 15 kW
 
-**Respuesta: B — 10 kW.** Cargas no coincidentes: se usa la mayor. Ref: 220.60.
+**Respuesta: B — 10 kW.** Cargas no coincidentes: se usa la mayor. Ref: 120.60.
 
 ### 31.
 **ES:** La carga calculada de una vivienda es 33,600 VA a 120/240 V monofásico. ¿Cuántos amperes?
@@ -236,9 +236,10 @@ A) 120 A  B) 140 A  C) 160 A  D) 280 A
 aplicar la demanda?
 **EN:** Dwelling optional method: general load (not including heat or A/C) is 30,000 VA. Load after demand?
 
-A) 12,000 VA  B) 15,000 VA  C) 18,000 VA  D) 22,000 VA
+A) 12,000 VA  B) 15,000 VA  C) 16,800 VA  D) 18,000 VA
 
-**Respuesta: C — 18,000 VA.** Primeros 10,000 VA al 100% + 20,000 × 40% = 8,000 → **18,000 VA**. Ref: 220.82(B).
+**Respuesta: C — 16,800 VA.** Primeros 8,000 VA al 100% + 22,000 × 40% = 8,800 → **16,800 VA**. Ref: 120.82(B).
+Cuidado: en el NEC 2026 el primer bloque al 100% bajó de 10 kVA a **8 kVA**. La respuesta D usa el valor viejo.
 
 ### 33.
 **ES:** La demanda de una estufa es 8 kW. ¿Qué carga se usa para el **neutro** del alimentador/servicio?
@@ -246,7 +247,7 @@ A) 12,000 VA  B) 15,000 VA  C) 18,000 VA  D) 22,000 VA
 
 A) 4,000 W  B) 5,600 W  C) 6,400 W  D) 8,000 W
 
-**Respuesta: B — 5,600 W.** 8,000 × 70% = **5,600 W**. Ref: 220.61(B)(1).
+**Respuesta: B — 5,600 W.** 8,000 × 70% = **5,600 W**. Ref: 120.61(B)(1).
 
 ---
 
@@ -328,7 +329,7 @@ A) 6 AWG  B) 4 AWG  C) 2 AWG  D) 1/0 AWG
 
 A) 7,500 VA  B) 9,000 VA  C) 10,000 VA  D) 15,000 VA
 
-**Respuesta: B — 9,000 VA.** 50 × 180 VA = **9,000 VA**. Ref: 220.14(I).
+**Respuesta: B — 9,000 VA.** 50 × 180 VA = **9,000 VA**. Ref: 120.14(I).
 
 ### 42.
 **ES:** Un edificio comercial tiene 80 receptáculos de uso general. Aplique el factor de demanda. ¿Carga neta?
@@ -337,7 +338,7 @@ A) 7,500 VA  B) 9,000 VA  C) 10,000 VA  D) 15,000 VA
 A) 10,000 VA  B) 12,200 VA  C) 14,400 VA  D) 7,200 VA
 
 **Respuesta: B — 12,200 VA.** 80 × 180 = 14,400 VA. Primeros 10,000 al 100% + 4,400 × 50% = 2,200 → **12,200 VA**.
-Ref: 220.44.
+Ref: 120.44.
 
 ### 43.
 **ES:** Un escaparate (show window) mide 30 pies lineales. ¿Carga mínima de alumbrado?
@@ -345,7 +346,7 @@ Ref: 220.44.
 
 A) 3,600 VA  B) 4,500 VA  C) 6,000 VA  D) 9,000 VA
 
-**Respuesta: C — 6,000 VA.** 30 × 200 VA por pie = **6,000 VA**. Ref: 220.14(G).
+**Respuesta: C — 6,000 VA.** 30 × 200 VA por pie = **6,000 VA**. Ref: 120.14(G).
 
 ### 44.
 **ES:** Un local comercial con entrada para peatones requiere una salida para letrero. ¿Carga mínima de esa salida?
@@ -353,7 +354,7 @@ A) 3,600 VA  B) 4,500 VA  C) 6,000 VA  D) 9,000 VA
 
 A) 180 VA  B) 600 VA  C) 1,200 VA  D) 1,500 VA
 
-**Respuesta: C — 1,200 VA.** Ref: 220.14(F), 600.5.
+**Respuesta: C — 1,200 VA.** Ref: 120.14(F), 600.5.
 
 ### 45. ⚠
 **ES:** Un edificio de oficinas de 10,000 pies². ¿Carga de alumbrado general (sin factor de continuidad)?
@@ -362,7 +363,7 @@ A) 180 VA  B) 600 VA  C) 1,200 VA  D) 1,500 VA
 A) 10,000 VA  B) 13,000 VA  C) 25,000 VA  D) 35,000 VA
 
 **Respuesta: B — 13,000 VA.** 10,000 × 1.3 VA/pie² = **13,000 VA**.
-Ref: Tabla 220.42(A) ⚠ — **verify the office unit load and table number in 2026.**
+Ref: Tabla 120.42(A) ⚠ — **verify the office unit load and table number in 2026.**
 
 ### 46.
 **ES:** ¿Cuántos receptáculos de uso general se pueden conectar a un circuito de 20 A, 120 V en un local comercial?
@@ -370,7 +371,7 @@ Ref: Tabla 220.42(A) ⚠ — **verify the office unit load and table number in 2
 
 A) 10  B) 12  C) 13  D) 16
 
-**Respuesta: C — 13.** (20 × 120) ÷ 180 = 13.3 → **13** (siempre redondear hacia abajo). Ref: 220.14(I).
+**Respuesta: C — 13.** (20 × 120) ÷ 180 = 13.3 → **13** (siempre redondear hacia abajo). Ref: 120.14(I).
 
 ### 47.
 **ES:** ¿Carga continua máxima en un interruptor de 20 A que no está listado para operar al 100%?
