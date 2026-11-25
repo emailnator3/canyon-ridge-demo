@@ -19,6 +19,7 @@ offers every electrician exam in Spanish.
 | `01-tdlr-records-request.md` | Ask TDLR how many exams are taken in Spanish | Send this week |
 | `02-reviewer-recruitment.md` | Find a bilingual licensed electrician to check the Spanish | Post this week |
 | `03-muestra-calculos-10.md` | 10 free sample questions (bilingual) | Check answers, then post as free sample |
+| `04-preguntas-11-50.md` | Questions 11–50 — with 1–10 this makes the full 50-question paid product | Check answers + reviewer, then build PDF/Form |
 
 ## The weekly system (target: 7–9 hrs/week of your time)
 | Step | Who does it | Your time/week |
